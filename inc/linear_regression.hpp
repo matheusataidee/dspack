@@ -10,6 +10,7 @@ private:
     int n_features_;
     vector<vector<double> > dataset_;
     vector<double> y_;
+    double step;
 
     vector<double> teta;
 public:

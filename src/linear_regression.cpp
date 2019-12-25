@@ -1,6 +1,7 @@
 #include "linear_regression.hpp"
 
 LinearRegression::LinearRegression(int n_features, vector<vector<double> > dataset, vector<double> y) {
+    step = 0.01; // TODO: Make it changeable
     n_features_ = n_features;
     teta = vector<double>(n_features_ + 1);
     y_ = y;
@@ -30,5 +31,20 @@ vector<vector<double> > LinearRegression::getNormalizedDataset() {
 }
 
 void LinearRegression::train(int n_iterations) {
-
+    for (int k = 0; k < n_iterations; k++) {
+        vector<double> dif(n_features_ + 1);
+        for (int i = 0; i < (int)dataset_.size(); i++) {
+            double prediction = teta[0];
+            for (int j = 1; j <= n_features_; j++) {
+                prediction += teta[j] * dataset_[i][j-1];
+            }
+            dif[0] += prediction - y_[i];
+            for (int j = 1; j <= n_features_; j++) {
+                dif[j] += (prediction - y_[i]) * dataset_[i][j-1];
+            }
+        }
+        for (int i = 0; i <= n_features_; i++) {
+            teta[i] -= (step / (double)dataset_.size()) * dif[i];
+        }
+    }
 }
