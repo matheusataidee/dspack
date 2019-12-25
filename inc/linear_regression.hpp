@@ -14,6 +14,8 @@ private:
     vector<double> teta_1;
 public:
     LinearRegression(int n_features, vector<vector<double> > dataset);
+
+    vector<vector<double> > getNormalizedDataset();
 };
 
 #endif // LINEAR_REGRESSION_HPP_
