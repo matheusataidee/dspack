@@ -7,20 +7,22 @@ using namespace std;
 
 int main() {
     vector<vector<double> > dataset;
+    vector<double> y;
     int n_features = 3;
     int n_samples = 200;
-    int y_id = 2;
 
     dataset = vector<vector<double> >(n_samples, vector<double>(n_features));
+    y = vector<double>(n_samples);
     for (int i = 0; i < n_samples; i++) {
         for (int j = 0; j < n_features; j++) {
             dataset[i][j] = rand() % 1000;
             if ((rand() % 100) < 50) dataset[i][j] *= -1;
         }
+        y[i] = rand() % 1000;
     }
 
 
-    LinearRegression model(n_features, y_id, dataset);
+    LinearRegression model(n_features, dataset, y);
 
     vector<vector<double> > norm_dataset = model.getNormalizedDataset();
 
@@ -28,7 +30,6 @@ int main() {
     for (int i = 0; i < n_samples; i++) {
         assert((int)norm_dataset[i].size() == n_features);
         for (int j = 0; j < n_features; j++) {
-            if (j == y_id) continue;
             // Verifying if values are in norm range
             assert(norm_dataset[i][j] >= -1.0);
             assert(norm_dataset[i][j] <= 1.0);

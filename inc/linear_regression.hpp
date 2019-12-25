@@ -8,12 +8,12 @@ using namespace std;
 class LinearRegression {
 private:
     int n_features_;
-    int y_id;
     vector<vector<double> > dataset_;
+    vector<double> y_;
 
     vector<double> teta;
 public:
-    LinearRegression(int n_features, int id, vector<vector<double> > dataset);
+    LinearRegression(int n_features, vector<vector<double> > dataset, vector<double> y);
 
     vector<vector<double> > getNormalizedDataset();
     void train(int n_iterations);

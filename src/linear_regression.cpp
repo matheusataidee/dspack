@@ -1,14 +1,13 @@
 #include "linear_regression.hpp"
 
-LinearRegression::LinearRegression(int n_features, int id, vector<vector<double> > dataset) {
-    int y_id = id;
+LinearRegression::LinearRegression(int n_features, vector<vector<double> > dataset, vector<double> y) {
     n_features_ = n_features;
     teta = vector<double>(n_features_ + 1);
+    y_ = y;
 
     dataset_ = vector<vector<double> >(dataset.size(), vector<double>(n_features_));
     // Normalization of dataset features
     for (int j = 0; j < n_features_; j++) {
-        if (j == y_id) continue;
         double sum = 0.0;
         double mini = dataset[0][j];
         double maxi = dataset[0][j];
