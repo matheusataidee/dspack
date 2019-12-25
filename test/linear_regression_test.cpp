@@ -9,6 +9,7 @@ int main() {
     vector<vector<double> > dataset;
     int n_features = 3;
     int n_samples = 200;
+    int y_id = 2;
 
     dataset = vector<vector<double> >(n_samples, vector<double>(n_features));
     for (int i = 0; i < n_samples; i++) {
@@ -19,7 +20,7 @@ int main() {
     }
 
 
-    LinearRegression model(n_features, dataset);
+    LinearRegression model(n_features, y_id, dataset);
 
     vector<vector<double> > norm_dataset = model.getNormalizedDataset();
 
@@ -27,6 +28,7 @@ int main() {
     for (int i = 0; i < n_samples; i++) {
         assert((int)norm_dataset[i].size() == n_features);
         for (int j = 0; j < n_features; j++) {
+            if (j == y_id) continue;
             // Verifying if values are in norm range
             assert(norm_dataset[i][j] >= -1.0);
             assert(norm_dataset[i][j] <= 1.0);
