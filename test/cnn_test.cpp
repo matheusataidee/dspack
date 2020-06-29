@@ -1,12 +1,12 @@
-#include "cnn.hpp"
+#include "model.hpp"
 
 #include <iostream>
 
 int main() {
-    CNN cnn = CNN();
-    cnn.addLayer(24, 24);
-    cnn.addLayer(24, 24);
-    cnn.addLayer(24, 24);
+
+    Model cnn = Model();
+    cnn.addCNNLayer(32, 3, 3);
+    cnn.addPoolingLayer(2, 2);
     cout << cnn.getSize() << endl;
     return 0;
 }

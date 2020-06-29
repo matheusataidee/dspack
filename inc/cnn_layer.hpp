@@ -1,16 +1,18 @@
 #ifndef CNN_LAYER_HPP_
 #define CNN_LAYER_HPP_
 
+#include "layer.hpp"
+
 #include <vector>
 
 using namespace std;
 
-class CNNLayer {
+class CNNLayer : public Layer {
 private:
-    int h_, w_;
-    vector<vector<double> > m;
+    int n_, h_, w_;
+    vector<vector<vector<double> > > m;
 public:
-    CNNLayer(int h, int w);
+    CNNLayer(int n, int h, int w);
 };
 
 #endif // CNN_LAYER_HPP_
