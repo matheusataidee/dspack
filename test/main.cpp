@@ -26,5 +26,8 @@ int main() {
                 break;
         }
     }
+
+    Tensor input = Tensor(1, 28, 28);
+    cnn.apply(input);
     return 0;
 }

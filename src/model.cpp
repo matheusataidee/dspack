@@ -29,7 +29,28 @@ int Model::getSize() {
 }
 
 Tensor Model::runConvolution(Tensor tensor, int cur) {
-    return tensor;
+    CNNLayer* cnn_layer = (CNNLayer*) layer[cur];
+    Tensor output = Tensor(cnn_layer->getN(),
+                           tensor.n - (cnn_layer->getH() - 1),
+                           tensor.m - (cnn_layer->getW() - 1));
+    
+    cout << output.l << " " << output.n << " " << output.m << endl;
+    for (int k = 0; k < output.l; k++) {
+        for (int i = 0; i < output.n; i++) {
+            for (int j = 0; j < output.m; j++) {
+                output.clean(k, i, j);
+                for (int ii = 0; ii < cnn_layer->getH(); ii++) {
+                    for (int jj = 0; jj < cnn_layer->getW(); jj++) {
+                        output.addTo(k, i, j, cnn_layer->getVal(k, ii, jj) * 
+                                              tensor.getVal(0, i + ii, j + jj));
+                    }
+                }
+                output.relu(k, i, j);
+            }
+        }
+    }
+
+    return output;
 }
 
 Tensor Model::runPooling(Tensor tensor, int cur) {

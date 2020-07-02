@@ -9,10 +9,18 @@ using namespace std;
 
 class CNNLayer : public Layer {
 private:
-    int n_, h_, w_;
-    vector<vector<vector<double> > > m;
+    int n, h, w;
+    vector<vector<vector<double> > > v;
 public:
     CNNLayer(int n, int h, int w);
+
+    int getN();
+
+    int getH();
+
+    int getW();
+
+    double getVal(int k, int i, int j);
 };
 
 #endif // CNN_LAYER_HPP_

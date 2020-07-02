@@ -7,12 +7,18 @@ using namespace std;
 
 class Tensor {
 public:
-int n, m;
+int n, m, l;
 vector<double> v;
 
-Tensor(int n, int m);
+Tensor(int l, int n, int m);
 
-int getElement(int i, int j);
+void clean(int k, int i, int j);
+
+void relu(int k, int i, int j);
+
+int getVal(int k, int i, int j);
+
+void addTo(int k, int i, int j, double val);
 
 };
 

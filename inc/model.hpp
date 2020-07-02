@@ -1,6 +1,8 @@
 #ifndef MODEL_HPP_
 #define MODEL_HPP_
 
+#include <iostream>
+
 #include "cnn_layer.hpp"
 #include "pooling_layer.hpp"
 #include "dense_layer.hpp"
