@@ -4,7 +4,11 @@ Tensor::Tensor(int l, int n, int m) : l(l), n(n), m(m) {
     v = vector<double>(l * n * m);
 }
 
-int Tensor::getVal(int k, int i, int j) {
+void Tensor::setVal(int k, int i, int j, double val) {
+    v[k * n * m + i * m + j] = val;
+}
+
+double Tensor::getVal(int k, int i, int j) {
     return v[k * n * m + i * m + j];
 }
 

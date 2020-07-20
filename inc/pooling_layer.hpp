@@ -10,6 +10,10 @@ private:
     int h_, w_;
 public:
     PoolingLayer(int h, int w);
+
+    int getH();
+
+    int getW();
 };
 
 #endif // POOLING_LAYER_HPP_

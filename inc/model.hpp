@@ -2,6 +2,8 @@
 #define MODEL_HPP_
 
 #include <iostream>
+#include <cmath>
+#include <algorithm>
 
 #include "cnn_layer.hpp"
 #include "pooling_layer.hpp"

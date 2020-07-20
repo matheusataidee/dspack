@@ -16,7 +16,9 @@ void clean(int k, int i, int j);
 
 void relu(int k, int i, int j);
 
-int getVal(int k, int i, int j);
+void setVal(int k, int i, int j, double val);
+
+double getVal(int k, int i, int j);
 
 void addTo(int k, int i, int j, double val);
 

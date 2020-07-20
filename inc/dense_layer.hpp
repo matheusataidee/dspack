@@ -8,9 +8,10 @@
 using namespace std;
 
 class DenseLayer : public Layer {
-private:
-    vector<vector<double> > m;
 public:
+    int n, m;
+    vector<vector<double> > v;
+
     DenseLayer(int input_size, int output_size);
 };
 

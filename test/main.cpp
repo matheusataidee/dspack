@@ -28,6 +28,7 @@ int main() {
     }
 
     Tensor input = Tensor(1, 28, 28);
-    cnn.apply(input);
+    Tensor output = cnn.apply(input);
+    cout << output.l << " " << output.n << " " << output.m << endl;
     return 0;
 }

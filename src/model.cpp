@@ -34,7 +34,6 @@ Tensor Model::runConvolution(Tensor tensor, int cur) {
                            tensor.n - (cnn_layer->getH() - 1),
                            tensor.m - (cnn_layer->getW() - 1));
     
-    cout << output.l << " " << output.n << " " << output.m << endl;
     for (int k = 0; k < output.l; k++) {
         for (int i = 0; i < output.n; i++) {
             for (int j = 0; j < output.m; j++) {
@@ -53,16 +52,48 @@ Tensor Model::runConvolution(Tensor tensor, int cur) {
     return output;
 }
 
-Tensor Model::runPooling(Tensor tensor, int cur) {
-    return tensor;
+Tensor Model::runPooling(Tensor input, int cur) {
+    PoolingLayer* pooling_layer = (PoolingLayer*) layer[cur];
+    Tensor output = Tensor(input.l,
+                            input.n / pooling_layer->getH(),
+                            input.m / pooling_layer->getW());
+
+    for (int k = 0; k < output.l; k++) {
+        for (int i = 0; i < output.n; i++) {
+            for (int j = 0; j < output.m; j++) {
+                output.clean(k, i, j);
+                double maxi = input.getVal(k, i * pooling_layer->getH(), 
+                                              j * pooling_layer->getW());
+                for (int ii = 0; ii < pooling_layer->getH(); ii++) {
+                    for (int jj = 0; jj < pooling_layer->getW(); jj++) {
+                        maxi = max(maxi, input.getVal(k, i * pooling_layer->getH() + ii, 
+                                                         j * pooling_layer->getW() + jj));
+                    }
+                }
+                output.setVal(k, i, j, maxi);
+            }
+        }
+    }
+    return output;
 }
 
 Tensor Model::runFlatten(Tensor tensor) {
+    tensor.m = tensor.l * tensor.n * tensor.m;
+    tensor.l = 1;
+    tensor.n = 1;
     return tensor;
 }
 
-Tensor Model::runDense(Tensor tensor, int cur) {
-    return tensor;
+Tensor Model::runDense(Tensor input, int cur) {
+    DenseLayer* dense_layer = (DenseLayer*) layer[cur];
+    Tensor output = Tensor(1, 1, dense_layer->m);
+    for (int j = 0; j < output.m; j++) {
+        output.clean(0, 0, j);
+        for (int i = 0; i < dense_layer->n; i++) {
+            output.addTo(0, 0, j, input.getVal(0, 0, i) * dense_layer->v[i][j]);
+        }
+    }
+    return output;
 }
 
 Tensor Model::apply(Tensor input) {
