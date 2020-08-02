@@ -1,5 +1,5 @@
-#ifndef CNN_LAYER_HPP_
-#define CNN_LAYER_HPP_
+#ifndef CONV_LAYER_HPP_
+#define CONV_LAYER_HPP_
 
 #include "layer.hpp"
 
@@ -7,12 +7,12 @@
 
 using namespace std;
 
-class CNNLayer : public Layer {
+class ConvLayer : public Layer {
 private:
     int n, h, w;
     vector<vector<vector<double> > > v;
 public:
-    CNNLayer(int n, int h, int w);
+    ConvLayer(int n, int h, int w);
 
     int getN();
 
@@ -23,4 +23,4 @@ public:
     double getVal(int k, int i, int j);
 };
 
-#endif // CNN_LAYER_HPP_
+#endif // CONV_LAYER_HPP_

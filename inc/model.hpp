@@ -5,7 +5,7 @@
 #include <cmath>
 #include <algorithm>
 
-#include "cnn_layer.hpp"
+#include "conv_layer.hpp"
 #include "pooling_layer.hpp"
 #include "dense_layer.hpp"
 #include "tensor.hpp"
@@ -38,7 +38,7 @@ public:
 
     Model();
 
-    void addCNNLayer(int n, int h, int w);
+    void addConvLayer(int n, int h, int w);
 
     void addPoolingLayer(int h, int w);
 

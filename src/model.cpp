@@ -2,9 +2,9 @@
 
 Model::Model() { }
 
-void Model::addCNNLayer(int n, int h, int w) {
-    CNNLayer* cnn_layer = new CNNLayer(n, h, w);
-    layer.push_back(cnn_layer);
+void Model::addConvLayer(int n, int h, int w) {
+    ConvLayer* conv_layer = new ConvLayer(n, h, w);
+    layer.push_back(conv_layer);
     layer_type.push_back(CONV2D);
 }
 
@@ -29,18 +29,18 @@ int Model::getSize() {
 }
 
 Tensor Model::runConvolution(Tensor tensor, int cur) {
-    CNNLayer* cnn_layer = (CNNLayer*) layer[cur];
-    Tensor output = Tensor(cnn_layer->getN(),
-                           tensor.n - (cnn_layer->getH() - 1),
-                           tensor.m - (cnn_layer->getW() - 1));
+    ConvLayer* conv_layer = (ConvLayer*) layer[cur];
+    Tensor output = Tensor(conv_layer->getN(),
+                           tensor.n - (conv_layer->getH() - 1),
+                           tensor.m - (conv_layer->getW() - 1));
     
     for (int k = 0; k < output.l; k++) {
         for (int i = 0; i < output.n; i++) {
             for (int j = 0; j < output.m; j++) {
                 output.clean(k, i, j);
-                for (int ii = 0; ii < cnn_layer->getH(); ii++) {
-                    for (int jj = 0; jj < cnn_layer->getW(); jj++) {
-                        output.addTo(k, i, j, cnn_layer->getVal(k, ii, jj) * 
+                for (int ii = 0; ii < conv_layer->getH(); ii++) {
+                    for (int jj = 0; jj < conv_layer->getW(); jj++) {
+                        output.addTo(k, i, j, conv_layer->getVal(k, ii, jj) * 
                                               tensor.getVal(0, i + ii, j + jj));
                     }
                 }

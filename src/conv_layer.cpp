@@ -1,23 +1,23 @@
-#include "cnn_layer.hpp"
+#include "conv_layer.hpp"
 
-CNNLayer::CNNLayer(int n, int h, int w) : n(n), h(h), w(w) {
+ConvLayer::ConvLayer(int n, int h, int w) : n(n), h(h), w(w) {
     v = vector<vector<vector<double> > >(n, 
                                         vector<vector<double> >(h, 
                                         vector<double>(w)));
 }
 
-int CNNLayer::getN() {
+int ConvLayer::getN() {
     return n;
 }
 
-int CNNLayer::getH() {
+int ConvLayer::getH() {
     return h;
 }
 
-int CNNLayer::getW() {
+int ConvLayer::getW() {
     return w;
 }
 
-double CNNLayer::getVal(int k, int i, int j) {
+double ConvLayer::getVal(int k, int i, int j) {
     return v[k][i][j];
 }
